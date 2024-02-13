@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Fibonacci Zeta Value Calculator</title>
+    <script src="https://cdn.jsdelivr.net/npm/bignumber.js/bignumber.min.js"></script>
+    <script src="calculator.js"></script>
+    <script src="MZV.js"></script>
+    <style>
+        /* 全体のフォントを Consolas に設定 */
+        body {
+            font-family: Consolas, monospace;
+        }
+
+        /* ボタンのフォントを Consolas に設定 */
+        button {
+            font-family: Consolas, monospace;
+        }
+
+        /* 入力フィールドのフォントを Consolas に設定 */
+        input {
+            font-family: Consolas, monospace;
+        }
+
+        /* 結果のフォントを Consolas に設定 */
+        #result {
+            font-family: Consolas, monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Multiple Fibonacci Zeta Value Calculator</h1>
+    <form id="inputForm">
+        <!-- 入力フィールド -->
+        <label for="input_a">s1 :</label>
+        <input type="number" id="input_a" min="0" value="2"><br>
+        <label for="input_b">s2 :</label>
+        <input type="number" id="input_b" min="0" value="3"><br>
+        <label for="input_c">s3 :</label>
+        <input type="number" id="input_c" min="0" value="0"><br>
+        <label for="input_d">s4 :</label>
+        <input type="number" id="input_d" min="0" value="0"><br>
+        <label for="input_e">s5 :</label>
+        <input type="number" id="input_e" min="0" value="0"><br>
+        <label for="input_f">s6 :</label>
+        <input type="number" id="input_f" min="0" value="0"><br>
+        <label for="input_g">s7 :</label>
+        <input type="number" id="input_g" min="0" value="0"><br>
+        <label for="input_h">s8 :</label>
+        <input type="number" id="input_h" min="0" value="0"><br>
+        <label for="input_i">s9 :</label>
+        <input type="number" id="input_i" min="0" value="0"><br>
+        <label for="input_j">s10:</label>
+        <input type="number" id="input_j" min="0" value="0"><br>
+        <label for="input_k">precision:</label>
+        <input type="number" id="input_k" min="20" value="20"><br>
+        <label for="input_l">a:</label>
+        <input type="number" id="input_l" min="0" value="0"><br>
+    </form>
+
+    <!-- Switch -->
+    <label for="outputSwitch">Output Type:</label>
+    <select id="outputSwitch" onchange="toggleOutput()">
+        <option value="1">MFZV</option>
+        <option value="2">MZV</option>
+        <option value="3">MZSV</option>
+    </select><br>
+
+    <button onclick="calculate()">Calculate</button>
+    <p id="result"></p>
+
+    <script>
+        function calculate() {
+            var inputs = document.getElementById("inputForm").getElementsByTagName("input");
+            
+            var outputType = document.getElementById("outputSwitch").value;
+
+            // Check the output type and generate the result accordingly
+            if (outputType === "1") {
+
+                var results = MFZV(inputs);
+
+                var resultString = "";
+                
+                
+                resultString += "ζ_F(s1,s2,s3,s4,s5,s6,s7,s8,s9,s10)" + "<br>" + " = " + results + "<br>";
+                
+            } else if (outputType === "2") {
+                // Generate different type of output
+                // Modify this part according to your requirements
+
+                var results = zeta2(inputs);
+
+                var resultString = "";
+                resultString += "ζ(s1,s2,s3,s4,s5,s6,s7,s8,s9,s10)" + "<br>" + " = " + results + "<br>";
+                
+            } else if (outputType === "3"){
+                var results = MZSV(inputs);
+
+                var resultString = "";
+                resultString += "ζ*(s1,s2,s3,s4,s5,s6,s7,s8,s9,s10)" + "<br>" + " = " + results + "<br>";
+            }
+
+            document.getElementById("result").innerHTML = resultString;
+        }
+
+        function toggleOutput() {
+            // This function could be used to handle any actions when the output type is toggled
+            // You can add more complex logic here if needed
+        }
+    </script>
+</body>
+</html>
