@@ -3,23 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebAssembly with Emscripten</title>
+    <title>WebAssembly Example</title>
 </head>
 <body>
-    <h1>WebAssembly with Emscripten Example</h1>
-    <script src="hey.js"></script>
+    <h1>WebAssembly Example</h1>
+    <button onclick="calculate()">Calculate</button>
+    <p id="result">Result: </p>
+
     <script>
-        // WebAssembly モジュールをロードする
-        fetch('hey.wasm')
-            .then(response => response.arrayBuffer())
-            .then(bytes => WebAssembly.instantiate(bytes, {}))
-            .then(results => {
-                const instance = results.instance;
-                
-                // エクスポートされた関数を呼び出す
-                instance.exports._hey();
-            })
-            .catch(console.error);
+        function calculate() {
+            // WebAssemblyモジュールをロードする
+            fetch('hey.wasm')
+                .then(response => response.arrayBuffer())
+                .then(bytes => WebAssembly.instantiate(bytes, {}))
+                .then(results => {
+                    const instance = results.instance;
+
+                    // hey() 関数を呼び出して結果を取得する
+                    const result = instance.exports._hey();
+
+                    // 結果をHTMLに表示する
+                    document.getElementById('result').textContent = 'Result: ' + result;
+                })
+                .catch(console.error);
+        }
     </script>
 </body>
 </html>
